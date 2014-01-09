@@ -1,0 +1,25 @@
+/*            .radioimg {
+                border: 3px solid transparent;
+            }
+
+            .radioimg-selected {
+                border: 3px solid red;
+            }
+
+            .radioimg:hover {
+                border: 3px dotted rgba(121,121,121, 0.5);
+            }*/
+
+            .radioimg input[type=radio]:checked + label>img {
+              border: 1px solid #fff;
+              box-shadow: 0 0 3px 3px #090;
+
+            }
+
+            .radioimg label {
+                margin-right: 15px;
+            }
+
+            .radioimg input[type=radio] {
+                display: none;
+            }

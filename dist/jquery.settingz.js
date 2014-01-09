@@ -1,6 +1,6 @@
 /*
  *  Create simple html/css settings interface using JSON. - v0.0.1
- *  But it doesn't stop there. Get your
+ *  But it doesn't stop there. Get your settings in one nice JS object upon request.
  *  http://xypaul.github.io/settingz.js/
  *
  *  Made by Paul Knittel
@@ -14,17 +14,65 @@
         dataPlugin = "plugin_" + pluginName, // the name of using in .data()
         incrementId = 0, // used to create the incremental ID
         defaults = {
-            data: [{
-                title: "Connection Style", // Type whatever name you want
-                type: 'radioimg',   // "toggle", "radioimg"(needs plugin to be included)
-                var: 'connectionStyle',
-                options: [{value: "edgyLine", img: "http://placehold.it/100x100/35d/fff&text=L"},
-                       {value: "straightLine", img: "http://placehold.it/100x100/35d/fff&text=J"}]
-            }]
-        };   // default options
+            name: 'settingz',
+            data: [
+                {
+                    title: "Connection Style", // Type whatever name you want
+                    type: 'radioimg',   // "toggle", "radioimg"(needs plugin to be included)
+                    var: 'connectionStyle',
+                    options: [{value: "edgyLine", img: "http://placehold.it/150x100/35d/fff&text=L"},
+                              {value: "straightLine", img: "http://placehold.it/150x100/35d/fff&text=J"}]
+                },
+                {
+                    title: "Color Theme", // Type whatever name you want
+                    type: 'radioimg',   // "toggle", "radioimg"(needs plugin to be included)
+                    var: 'color',
+                    options: [{value: "light", img: "http://placehold.it/150x50/012/"},
+                              {value: "soft", img: "http://placehold.it/150x50/683/"},
+                              {value: "dark", img: "http://placehold.it/150x50/aae/"}]
+                },
+                {
+                    title: "Orientation", // Type whatever name you want
+                    type: 'radioimg',   // "toggle", "radioimg"(needs plugin to be included)
+                    var: 'orientation',
+                    options: [{value: "top-to-bottom", img: "http://placehold.it/100x100/012/"},
+                              {value: "right-to-left", img: "http://placehold.it/100x100/683/"},
+                              {value: "bottom-to-top", img: "http://placehold.it/100x100/683/"},
+                              {value: "left-to-right", img: "http://placehold.it/100x100/aae/"}]
+                }
+            ],
+            defaults: {
+                connectionStyle: "edgyLine",
+                color: "soft",
+                orientation: "left-to-right"
+            }
+        };
 
-    var privateMethod = function () {
-        return "checked"
+    var createRadioImg = function (container, uniqueID, options) {
+            $.each(options.options, function(i,d){
+
+                // Create input box
+                 var input = $('<input>', {
+                        'type': 'radio',
+                        'name': uniqueID,
+                        'id': uniqueID + i,
+                        'value': d.value
+                })
+
+                // Create label with img
+                var label = $('<label>', {
+                        'for': uniqueID + i,
+                        'html': $('<img>', {
+                                    src: d.img
+                        })
+                })
+
+                // By default select the first one
+                if (i == 0) input.prop("checked", true);
+
+                // Append items to the dom
+                container.append([input,label])
+            });
     };
 
     // The actual plugin constructor
@@ -40,6 +88,9 @@
             // Simplify common variables
             var o = this.options;
             var e = this.element;
+
+            // Save data onto the element
+            this.element.data('options', o);
 
             // Create unique id
             incrementId += 1;
@@ -57,18 +108,29 @@
                         'html': d.title
                 })
 
+                var uniqueID = o.name + i
+
                 // Depending on style
+                var container = $('<div>', {
+                    class: [uniqueID, d.type].join(" ")
+                });
+
+
+
+
                 switch (d.type) {
                     case "radioimg":
-
+                        createRadioImg(container, uniqueID, d)
                         break;
                 }
 
 
+                // Append dom elements first so you can select
+                e.append([title,container])
 
 
 
-                e.append([title,label])
+
 
             });
 
@@ -79,9 +141,53 @@
             this.element.data( dataPlugin, null );
         },
 
-        // public get method
-        href: function () {
-            return this.element.attr( 'href' );
+
+        results: function () {
+
+            // Make life easy
+            var e = this.element;
+            var data = e.data('options').data;
+
+            // Build the results array
+            var results = {};
+            e.find('div').each(function(i,d){
+
+                // Depending on type use different technique to get the value
+                switch (data[i].type) {
+                    case "radioimg":
+                        results[data[i].var] = $(d).find("input[type='radio']:checked").val();
+                        break;
+                }
+
+            })
+
+            return results
+        },
+
+        setDefault: function(defaultInput){
+
+            // Make life easy
+            var e = this.element;
+            var options = e.data('options');
+
+            // Check if default is provided otherwise fallback onto old settings
+            var d = (typeof defaultInput === "undefined") ? options.defaults : defaultInput;
+
+            // Loop through defaults and try and find a match in data.var
+            $.each(d, function(key, value){
+                // Find match for key
+
+                console.log(key)
+                $.each(options.data, function(i, a){
+
+                    if (a.var == key) {
+
+                        $(e.find('div')[i]).find('input[value=' + value + ']').prop('checked', true);
+                    }
+                })
+            })
+
+
         }
     }
 

@@ -5,35 +5,33 @@
 		<script src="bower_components/jquery/jquery.min.js"></script>
 		<script src="bower_components/radioimg/dist/jquery.radioimg.js"></script>
 		<script src="../src/jquery.settingz.js"></script>
+		<link href="../src/settingz-default.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 
 		<style>
-			.radioimg {
-				border: 3px solid transparent;
-			}
 
-			.radioimg-selected {
-				border: 3px solid red;
-			}
-
-			.radioimg:hover {
-				border: 3px dotted rgba(121,121,121, 0.5);
-			}
 		</style>
 
 		<h1>Default</h1>
 		<div class="default"></div>
 
-		<button type="button">Export - console.logged()</button>
+		<button class="btn-export" type="button">Export</button>
+		<button class="btn-default" type="button">Set default</button>
 
 		<script>
 			$(function() {
 
 				$('.default').settingz()
+				$('.default').settingz('setDefault', {connectionStyle: "edgyLine", color: "light", orientation: "left-to-right"});
 
-				$('button').click(function(){
+				$('.btn-export').click(function(){
 					var settings = $('.default').settingz('results');
+					console.log(settings)
+				})
+
+				$('.btn-default').click(function(){
+					$('.default').settingz('setDefault');
 				})
 
 			});
