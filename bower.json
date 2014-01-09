@@ -1,11 +1,18 @@
 {
-  "name": "settingz.js",
-  "version": "0.0.1",
-  "main": [ "/dist/jquery.settingz.js" ],
-  "ignore":
-  [
-    "src",
-    "node_modules"
+  name: 'settingz',
+  version: '0.0.1',
+  dependencies: {
+    jquery: '2.0.3',
+    radioimg: '*'
+  },
+  homepage: 'https://github.com/xypaul/settingz.js',
+  authors: [
+    'pkk <paulknittel@live.com>'
   ],
-  "dependencies": { "jquery": "latest" }
+  description: 'Define all your options in an array and get a simple html interface',
+  main: '/dist/jquery.settingz.js',
+  keywords: [
+    'jquery'
+  ],
+  license: 'MIT'
 }
