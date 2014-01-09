@@ -1,5 +1,5 @@
 {
-  "name": "settingz.js",
+  "name": "settingz",
   "version": "0.0.1",
   "main": [ "/dist/jquery.settingz.js" ],
   "ignore":
