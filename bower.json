@@ -7,10 +7,5 @@
     "src",
     "node_modules"
   ],
-  description: 'Define all your options in an array and get a simple html interface',
-  main: '/dist/jquery.settingz.js',
-  keywords: [
-    'jquery'
-  ],
-  license: 'MIT'
+  "dependencies": { "jquery": "latest" }
 }
