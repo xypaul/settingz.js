@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Settingz Example</title>
+		<script src="bower_components/jquery/jquery.min.js"></script>
+		<script src="bower_components/radioimg/dist/jquery.radioimg.js"></script>
+		<script src="../src/jquery.settingz.js"></script>
+	</head>
+	<body>
+
+		<style>
+			.radioimg {
+				border: 3px solid transparent;
+			}
+
+			.radioimg-selected {
+				border: 3px solid red;
+			}
+
+			.radioimg:hover {
+				border: 3px dotted rgba(121,121,121, 0.5);
+			}
+		</style>
+
+		<h1>Default</h1>
+		<div class="default"></div>
+
+		<button type="button">Export - console.logged()</button>
+
+		<script>
+			$(function() {
+
+				$('.default').settingz()
+
+				$('button').click(function(){
+					var settings = $('.default').settingz('results');
+				})
+
+			});
+		</script>
+	</body>
+</html>

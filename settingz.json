@@ -1,0 +1,29 @@
+{
+	"name": "settingz",
+	"title": "Create simple html/css settings interface using JSON.",
+	"description": "But it doesn't stop there. Get your settings in one nice JS object upon request.",
+	"keywords": [
+		"jquery",
+		"settings",
+		"options"
+	],
+	"version": "0.0.1",
+	"author": {
+		"name": "Paul Knittel",
+		"email": "paulknittel@live.com",
+		"url": "https://paulknittel.com"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "http://opensource.org/licenses/MIT"
+		}
+	],
+	"bugs": "https://github.com/xypaul/settingz.js/issues",
+	"homepage": "http://xypaul.github.io/settingz.js/",
+	"docs": "http://xypaul.github.io/settingz.js/",
+	"download": "http://xypaul.github.io/settingz.js/archive/master.zip",
+	"dependencies": {
+		"jquery": ">=1.9"
+	}
+}
