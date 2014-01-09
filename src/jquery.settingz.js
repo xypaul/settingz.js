@@ -211,7 +211,7 @@
         if (typeof arg === 'undefined' || typeof arg === 'object') {
 
             if ( typeof instance['init'] === 'function' ) {
-                instance.init( arg );
+                return instance.init( arg );
             }
 
         // checks that the requested public method exists
