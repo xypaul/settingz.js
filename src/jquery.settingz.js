@@ -126,6 +126,8 @@
 
             });
 
+            return e;
+
         },
 
         destroy: function () {
@@ -153,7 +155,7 @@
 
             })
 
-            return results
+            return results;
         },
 
         setDefault: function(defaultInput){
@@ -179,6 +181,7 @@
                 })
             })
 
+            return e;
 
         }
     }
